@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+    <!-- Define your beans here -->
+    <bean id="fortuneservice" class="com.learnspring.test.HappyFortuneService"/>
+    
+    <!-- define the dependency -->
+    
+ 	<bean id="swimcoach"
+ 		class="com.learnspring.test.SwimCoach">
+ 		<!-- Constructor injection -->
+ 		<constructor-arg ref="fortuneservice"/>
+ 		
+ 	</bean>
+ 	
+ 	<bean id="cricketcoach" class="com.learnspring.test.CricketCoach">
+ 	     <!-- Setter injection -->
+ 	    <property name="mFs" ref="fortuneservice"></property>
+ 	    
+ 	    <!-- Literal injection -->
+ 	    <property name="emailAddress"  value="${foo.email}"/>
+ 	    <property name="team" value="${foo.team}"/>
+ 	</bean>
+
+
+	<!--  First method to introduce register properties file inside applicationContext.xml -->
+    <!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>mymessage</value>
+            </list>
+        </property>
+    </bean>
+     -->
+    
+    <!--  Second method to introduce register properties file inside applicationContext.xml -->
+    <context:property-placeholder location="classpath:sport.properties"/>
+
+	<!-- <context:annotation-config/>
+    <context:component-scan base-package="com.learnspring.test"></context:component-scan> -->
+</beans>
+
+
+
+
+
