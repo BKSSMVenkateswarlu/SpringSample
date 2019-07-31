@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+    <!-- Define your beans here -->
+    <bean id="fortuneservice" class="com.learnspring.test.RandomFortuneService"/>
+    
+    <!-- define the dependency -->
+    <bean id="tenniesCoach" class="com.learnspring.test.TenniesCoach"
+        init-method="initMethod" destroy-method="destroyMethod">
+        <property name="mFs" ref="randomFortuneService"/>
+    </bean>
+    
+    <bean id="randomFortuneService" class="com.learnspring.test.RandomFortuneService">
+    <property name="mFortuneArray">
+ 	        <list value-type="java.lang.String">
+ 	            <value>You have a lucky day today</value>
+ 	            <value>You win all the situations today</value>
+ 	            <value>You will a 1 crore lottery</value>
+ 	        </list>
+ 	    </property>
+    </bean>
+    
+ 	</beans>
+
+
+
+
+

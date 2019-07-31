@@ -28,17 +28,34 @@
  	    <property name="emailAddress"  value="${foo.email}"/>
  	    <property name="team" value="${foo.team}"/>
  	</bean>
+ 	
+ 	<bean id="randomFortune" class="com.learnspring.test.RandomFortuneService">
+ 	    <property name="mFortuneArray">
+ 	        <list value-type="java.lang.String">
+ 	            <value>${happy.fortune}</value>
+ 	            <value>${win.fortune}</value>
+ 	            <value>${money.fortune}</value>
+ 	        </list>
+ 	    </property>
+ 	</bean>
+ 	
+ 	<bean id="footballCoach" class="com.learnspring.test.FootBallCoach">
+ 	    <property name="mFortuneService" ref="randomFortune"></property>
+ 	</bean>
+ 	
+ 	
 
 
 	<!--  First method to introduce register properties file inside applicationContext.xml -->
-    <!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<!-- ApplicationContextAware MessageSourceAware will work if only this bean is present. -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>mymessage</value>
+                <value>sport</value>
             </list>
         </property>
     </bean>
-     -->
+    
     
     <!--  Second method to introduce register properties file inside applicationContext.xml -->
     <context:property-placeholder location="classpath:sport.properties"/>
